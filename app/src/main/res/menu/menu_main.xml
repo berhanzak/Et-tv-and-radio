@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="stream.site90.xoolu.com.xoolutvandradio.MainActivity">
+
+    <item
+        app:showAsAction="never"
+        android:id="@+id/main_feedback"
+        android:title="@string/feedback" />
+
+    <item
+        app:showAsAction="never"
+        android:id="@+id/main_about"
+        android:title="@string/about" />>
+</menu>

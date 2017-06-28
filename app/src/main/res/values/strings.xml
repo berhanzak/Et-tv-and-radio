@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Xoolu Tv and Radio</string>
+    <string name="my_stream">የተቀዱ</string>
+    <string name="radioDataModel">ራዲዮ</string>
+    <string name="tv">ቲቪ</string>
+
+    <string name="about">About</string>
+    <string name="lang">Language</string>
+    <string name="feedback">Send feed back</string>
+    <string name="choose_lang">Choose Language</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="clear">Clear</string>
+    <string name="add">Add</string>
+    <string name="add_val">You can add you favorite channel by pressing the + button</string>
+    <string name="record">የተቀዱ</string>
+</resources>

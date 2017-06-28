@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "994344316261",
+    "firebase_url": "https://xoolu-dc8d0.firebaseio.com",
+    "project_id": "xoolu-dc8d0",
+    "storage_bucket": "xoolu-dc8d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994344316261:android:391c4e088d3214f8",
+        "android_client_info": {
+          "package_name": "stream.site90.xoolu.com.xoolutvandradio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994344316261-r95stsju0otcl4rd340c6t5fs91lrnvi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGRU2nlDApIQVX2YaCna8Dw2PvetFRj9Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

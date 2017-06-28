@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Xoolu Tv and Radio</string>
+    <string name="my_stream">የኔ ምርጫ</string>
+    <string name="radioDataModel">ራዲዮ</string>
+    <string name="tv">ቲቪ</string>
+    <string name="about">ስለ እኛ</string>
+    <string name="lang">ቋንቋ</string>
+    <string name="feedback">የእርስዎን አስተያየት</string>
+    <string name="choose_lang">ቋንቋ ይምረጡ</string>
+</resources>

@@ -1,0 +1,74 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:diagonal="http://schemas.android.com/tools"
+    android:id="@+id/coordinate"
+    android:background="#fff"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:background="#fff"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/seffafCollapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+
+            android:minHeight="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+
+            <com.github.florent37.diagonallayout.DiagonalLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:diagonal_angle="15"
+                app:diagonal_direction="right"
+                diagonal:diagonal_direction="left"
+                diagonal:diagonal_position="bottom">
+
+                <stream.site90.xoolu.com.xoolutvandradio.View.CustomImageView
+                    android:id="@+id/customImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    />
+
+                <View
+                    android:background="#80191919"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </com.github.florent37.diagonallayout.DiagonalLayout>
+
+            <ImageView
+                android:id="@+id/streamImageView"
+                android:padding="16dp"
+                android:layout_gravity="bottom"
+                android:layout_width="200dp"
+                android:layout_height="200dp" />
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:padding="8dp"
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</android.support.design.widget.CoordinatorLayout>
