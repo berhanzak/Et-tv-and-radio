@@ -33,17 +33,39 @@ import stream.site90.xoolu.com.xoolutvandradio.View.CustomImageView;
 
 public class Tv extends Fragment {
 
+    //main view
     private View view;
+
+    //progress view displayed after the main view is inflated
     private View progressView;
+
+    //list of tv objects for the recycle view
     private List<TvDataModel> streamList = new ArrayList<>();
+
+    //recycle view to list tv objects
     private RecyclerView recyclerView;
+
+    //adapter for the recycle view to map tv objects
     private TvAdapter adapter;
+
     private Toolbar toolBar;
+
+    //custom image that takes 2/3 of the screen height and have zooming animation
     private CustomImageView customImageView;
+
+    //tv icon for tv fragment
     private ImageView streamImage;
-    FirebaseDatabase database;
-    DatabaseReference reference;
+
+    //instance for the firebase databse
+    private FirebaseDatabase database;
+
+    //firebase reference fot the tv tree structure inside the firebase real time database
+    private DatabaseReference reference;
+
+    //final int array for the starting point of the image sliding animation
     final int[] i = {0};
+
+    //list of image links for the animation
     private List<String> imageList = new ArrayList<>();
 
     public Tv() {
@@ -56,34 +78,60 @@ public class Tv extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //inflating view
         view = inflater.inflate(R.layout.fragment_tv, container, false);
         progressView = inflater.inflate(R.layout.progress, container, false);
+
+        //referencing view from xml
         toolBar = (Toolbar) view.findViewById(R.id.toolbar);
-        toolBar.inflateMenu(R.menu.menu_main);
         customImageView = (CustomImageView) view.findViewById(R.id.customImageView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rv);
         streamImage = (ImageView) view.findViewById(R.id.streamImageView);
 
-       Glide.with(getContext()).load(R.drawable.tv).into(streamImage);
-       Glide.with(getContext()).load(R.drawable.first_image).into(customImageView);
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        //creating object
         adapter = new TvAdapter(getContext());
+
+
+
+
+        //inflating the toolbar with menu
+        toolBar.inflateMenu(R.menu.menu_main);
+
+        //loading image in to image view using glide image loading library
+         Glide.with(getContext()).load(R.drawable.tv).into(streamImage);
+         Glide.with(getContext()).load(R.drawable.first_image).into(customImageView);
+
+        //setting layout manger for the recycle view
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
+        //giving an adapter a recycle view an adapter
         recyclerView.setAdapter(adapter);
+
+        //get tv streams data from the firebase real time databse
         getData();
         return progressView;
     }
 
+
+    //method for getting tv data from the firebase real time databse
     private void getData() {
+
+        //get reference to firebase real time database
         database = FirebaseDatabase.getInstance();
 
+       //get the data node from the the tree that represent the tv stream data
        reference = database.getReference("data");
 
+        //add listener to retrieve data
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 streamList.clear();
+
+                //get stream data
                 Iterable<DataSnapshot> snaps = dataSnapshot.getChildren();
+
+                //add the tv data to the stream list
                 for (DataSnapshot snap : snaps) {
 
                         streamList.add(snap.getValue(TvDataModel.class));
@@ -97,6 +145,9 @@ public class Tv extends Fragment {
             }
         });
     }
+
+
+    //for updating the data from the adapter and add the main view back to the view hierarchy after removing the progress view
     private void updatedLayout() {
         adapter.setTvDataModelList(streamList);
         adapter.notifyDataSetChanged();
@@ -110,64 +161,58 @@ public class Tv extends Fragment {
         getImageLinks();
 
     }
+
+
+    //checking internet connectivity
     public boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager)
                 getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
+
+
+    //method for animating the sliding image
     private void startAnimatingImage() {
         try {
             Handler handler1 = new Handler();
             handler1.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-
                     try {
                         if (i[0] >= imageList.size()) {
                             i[0] = 0;
                         }
                         Glide.with(getContext()).load(imageList.get(i[0])).into(customImageView);
-
                         i[0]++;
                         startAnimatingImage();
-                    } catch (Exception e) {
-
+                    } catch (Exception ignored) {
                     }
                 }
             }, 8000);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-
     }
+
+
+
+    //get the image links from firebase database and store them in the image list
     private void getImageLinks() {
-
-
         DatabaseReference image = FirebaseDatabase.getInstance().getReference("image");
-
         ValueEventListener listener=new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 Iterable<DataSnapshot> dataSnapshotList = dataSnapshot.getChildren();
                 for (DataSnapshot data : dataSnapshotList) {
-
                     imageList.add(data.getValue().toString());
-
                 }
-
                 startAnimatingImage();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         };
-
         image.addValueEventListener(listener);
-
-
     }
 }
