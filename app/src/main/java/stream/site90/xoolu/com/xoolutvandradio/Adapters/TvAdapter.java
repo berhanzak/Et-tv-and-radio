@@ -3,7 +3,9 @@ package stream.site90.xoolu.com.xoolutvandradio.Adapters;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,10 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import stream.site90.xoolu.com.xoolutvandradio.MainActivity;
 import stream.site90.xoolu.com.xoolutvandradio.Model.TvDataModel;
 import stream.site90.xoolu.com.xoolutvandradio.R;
+import stream.site90.xoolu.com.xoolutvandradio.SubVideoViewActivity;
 
 public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder>{
 
@@ -49,6 +53,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder>{
         Glide.with(context).load(tvDataModelList.get(position).getImage()).into(holder.srcImageView);
         holder.srcTextView.setText(tvDataModelList.get(position).getName());
 
+
     }
 
     @Override
@@ -68,6 +73,20 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder>{
 
             srcImageView=(ImageView) itemView.findViewById(R.id.srcImageView);
             srcTextView=(TextView) itemView.findViewById(R.id.srcTextView);
+
+            //listener for tv items to start playing stream
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent=new Intent(context, SubVideoViewActivity.class);
+
+                    Log.i("TAG",tvDataModelList.get(getAdapterPosition()).getLink());
+                    intent.putExtra(SubVideoViewActivity.KEY,tvDataModelList.get(getAdapterPosition()));
+                    context.startActivity(intent);
+
+                }
+            });
         }
     }
 }

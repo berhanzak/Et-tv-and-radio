@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="stream.site90.xoolu.com.xoolutvandradio">
 
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -11,9 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
-
-
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SplashTheme">
@@ -23,19 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
         <activity
             android:name=".VideoActivity"
             android:screenOrientation="sensor"
             android:theme="@style/FullScreenTheme" />
-
+        <activity android:name=".SubVideoViewActivity"></activity>
     </application>
 
 </manifest>

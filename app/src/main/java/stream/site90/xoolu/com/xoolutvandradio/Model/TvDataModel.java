@@ -1,8 +1,9 @@
 package stream.site90.xoolu.com.xoolutvandradio.Model;
 
 
+import java.io.Serializable;
 
-public class TvDataModel {
+public class TvDataModel implements Serializable{
 
     private String image;
     private String name;
