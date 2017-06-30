@@ -27,6 +27,8 @@
             android:name=".VideoActivity"
             android:screenOrientation="sensor"
             android:theme="@style/FullScreenTheme" />
+
+
         <activity android:name=".SubVideoViewActivity"></activity>
     </application>
 

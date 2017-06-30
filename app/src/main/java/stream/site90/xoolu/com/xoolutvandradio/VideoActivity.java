@@ -1,5 +1,6 @@
 package stream.site90.xoolu.com.xoolutvandradio;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,20 +20,37 @@ import org.jsoup.nodes.Document;
 
 
 import im.delight.android.webview.AdvancedWebView;
+import stream.site90.xoolu.com.xoolutvandradio.Model.TvDataModel;
 
-public class VideoActivity extends AppCompatActivity implements OnPreparedListener {
+public class VideoActivity extends AppCompatActivity implements OnPreparedListener,AdvancedWebView.Listener {
 
     private VideoView videoView;
     private AdvancedWebView webView;
+    private TvDataModel tvDataModel;
+
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
+
+        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+
+        tvDataModel=(TvDataModel) getIntent().getSerializableExtra(SubVideoViewActivity.KEY);
+
         webView=(AdvancedWebView) findViewById(R.id.webview);
         videoView = (VideoView)findViewById(R.id.video_view);
-        String string = getIntent().getStringExtra("URL");
-        String type=getIntent().getStringExtra("TYPE");
 
-        checkType(type,string);
+        //get the streaming link
+        String link =tvDataModel.getLink();
+
+        //get the tv data model
+        String type=tvDataModel.getType();
+
+        webView.setListener(this,this);
+
+        checkType(type,link);
 
     }
 
@@ -115,4 +133,28 @@ public class VideoActivity extends AppCompatActivity implements OnPreparedListen
     }
 
 
+    @Override
+    public void onPageStarted(String url, Bitmap favicon) {
+
+    }
+
+    @Override
+    public void onPageFinished(String url) {
+
+    }
+
+    @Override
+    public void onPageError(int errorCode, String description, String failingUrl) {
+
+    }
+
+    @Override
+    public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent) {
+
+    }
+
+    @Override
+    public void onExternalPageRequest(String url) {
+
+    }
 }

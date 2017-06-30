@@ -1,5 +1,6 @@
 package stream.site90.xoolu.com.xoolutvandradio;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -40,12 +41,16 @@ public class SubVideoViewActivity extends AppCompatActivity implements OnPrepare
     private TextView channelName;
     private RecyclerView recyclerView;
     private SubVideoStreamAdapter adapter;
-    TvDataModel tvDataModel;
+    private TvDataModel tvDataModel;
+    private ImageView expandImageView;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_video_view);
+
+        position=0;
 
        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
 
@@ -57,6 +62,19 @@ public class SubVideoViewActivity extends AppCompatActivity implements OnPrepare
         videoView = (VideoView)findViewById(R.id.video_view);
         channelName=(TextView) findViewById(R.id.channelName);
         recyclerView=(RecyclerView) findViewById(R.id.rv);
+        expandImageView=(ImageView) findViewById(R.id.expandImageView);
+
+        //expand the view to the full screen
+        expandImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(SubVideoViewActivity.this, VideoActivity.class);
+                intent.putExtra(SubVideoViewActivity.KEY,TvAdapter.getTvDataModelList().get(position));
+                startActivity(intent);
+
+            }
+        });
 
         //set the layout manager of the recylve viw
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
@@ -70,11 +88,13 @@ public class SubVideoViewActivity extends AppCompatActivity implements OnPrepare
         //get the streaming link
         String link =tvDataModel.getLink();
 
+        //get the tv data model
+        String type=tvDataModel.getType();
+
         //set the channel name
         channelName.setText(tvDataModel.getName());
 
-        //get the tv data model
-        String type=tvDataModel.getType();
+
 
         webView.setListener(this,this);
 
@@ -251,14 +271,19 @@ public class SubVideoViewActivity extends AppCompatActivity implements OnPrepare
 
 
                 //set the channel name
-                channelName.setText(TvAdapter.getTvDataModelList().get(getAdapterPosition()).getName());
 
                 //listener for tv items to start playing stream
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+
+                        channelName.setText(TvAdapter.getTvDataModelList().get(getAdapterPosition()).getName());
+
                         checkType(TvAdapter.getTvDataModelList().get(getAdapterPosition()).getType(),
                                 TvAdapter.getTvDataModelList().get(getAdapterPosition()).getLink());
+
+                        position =getAdapterPosition();
 
 
                     }
