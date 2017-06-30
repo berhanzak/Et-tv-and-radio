@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private Record record;
 
 
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
