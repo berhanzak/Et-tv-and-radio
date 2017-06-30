@@ -13,6 +13,7 @@
         android:layout_height="0dp"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
         <im.delight.android.webview.AdvancedWebView
             android:visibility="gone"
             android:id="@+id/webview"
@@ -27,17 +28,26 @@
             app:useDefaultControls="true"/>
 
 
+        <TextView
+            android:id="@+id/channelName"
+            android:textSize="12sp"
+            android:background="#00ffffff"
+            android:layout_alignParentTop="true"
+            android:padding="16dp"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
 
-    <View
-        android:layout_weight="1"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
-
-
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
 </LinearLayout>

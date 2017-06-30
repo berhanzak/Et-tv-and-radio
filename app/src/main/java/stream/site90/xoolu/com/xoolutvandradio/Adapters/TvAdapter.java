@@ -28,7 +28,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder>{
     private Context context;
 
     //list of tv object
-    private List<TvDataModel> tvDataModelList=new ArrayList<>();
+    private static List<TvDataModel> tvDataModelList=new ArrayList<>();
 
     //create tv adapter
     public TvAdapter(Context context){
@@ -37,8 +37,8 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder>{
     }
 
     //set the tv list
-    public void setTvDataModelList(List<TvDataModel> tvDataModelList) {
-        this.tvDataModelList = tvDataModelList;
+    public void setTvDataModelList(List<TvDataModel> tvDataMode) {
+        tvDataModelList = tvDataMode;
     }
 
     @Override
@@ -80,7 +80,6 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder>{
                 public void onClick(View v) {
 
                     Intent intent=new Intent(context, SubVideoViewActivity.class);
-
                     Log.i("TAG",tvDataModelList.get(getAdapterPosition()).getLink());
                     intent.putExtra(SubVideoViewActivity.KEY,tvDataModelList.get(getAdapterPosition()));
                     context.startActivity(intent);
@@ -88,5 +87,12 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder>{
                 }
             });
         }
+    }
+
+
+    public static List<TvDataModel> getTvDataModelList(){
+
+        return tvDataModelList;
+
     }
 }

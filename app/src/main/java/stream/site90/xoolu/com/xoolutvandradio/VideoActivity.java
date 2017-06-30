@@ -31,6 +31,13 @@ public class VideoActivity extends AppCompatActivity implements OnPreparedListen
         videoView = (VideoView)findViewById(R.id.video_view);
         String string = getIntent().getStringExtra("URL");
         String type=getIntent().getStringExtra("TYPE");
+
+        checkType(type,string);
+
+    }
+
+
+    private void checkType(String type,String string){
         if(type.equals("web")){
             setUpWebView(string);
         }else if(type.equals("direct")){
@@ -39,6 +46,9 @@ public class VideoActivity extends AppCompatActivity implements OnPreparedListen
             download(string);
         }
     }
+
+
+
     private void setUpWebView(String string) {
         videoView.setVisibility(View.GONE);
         webView.setVisibility(View.VISIBLE);
