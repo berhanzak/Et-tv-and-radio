@@ -2,6 +2,7 @@ package stream.site90.xoolu.com.xoolutvandradio.Fragment;
 
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -91,9 +92,6 @@ public class Tv extends Fragment {
         //creating object
         adapter = new TvAdapter(getContext());
 
-
-
-
         //inflating the toolbar with menu
         toolBar.inflateMenu(R.menu.menu_main);
 
@@ -101,8 +99,44 @@ public class Tv extends Fragment {
          Glide.with(getContext()).load(R.drawable.tv).into(streamImage);
          Glide.with(getContext()).load(R.drawable.first_image).into(customImageView);
 
+
+        int screenSize=getContext().getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        int screenOrientation=getContext().getResources().getConfiguration().orientation;
+
+
+
+        if(screenSize==Configuration.SCREENLAYOUT_SIZE_LARGE || screenSize==Configuration.SCREENLAYOUT_SIZE_XLARGE){
+
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
+        }else if(screenSize==Configuration.SCREENLAYOUT_SIZE_SMALL || screenSize==Configuration.SCREENLAYOUT_SIZE_NORMAL){
+
+            if(screenOrientation==Configuration.ORIENTATION_LANDSCAPE){
+
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
+            }else{
+
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+            }
+
+        }else{
+            if(screenOrientation==Configuration.ORIENTATION_LANDSCAPE){
+
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
+            }else{
+
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+            }
+
+        }
+
         //setting layout manger for the recycle view
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
         //giving an adapter a recycle view an adapter
         recyclerView.setAdapter(adapter);

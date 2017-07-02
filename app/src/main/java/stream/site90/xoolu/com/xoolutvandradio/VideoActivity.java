@@ -35,7 +35,6 @@ public class VideoActivity extends AppCompatActivity implements OnPreparedListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
-        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
 
         tvDataModel=(TvDataModel) getIntent().getSerializableExtra(SubVideoViewActivity.KEY);
 

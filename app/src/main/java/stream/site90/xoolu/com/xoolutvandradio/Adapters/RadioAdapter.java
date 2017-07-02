@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import stream.site90.xoolu.com.xoolutvandradio.Fragment.Radio;
 import stream.site90.xoolu.com.xoolutvandradio.Model.RadioDataModel;
 import stream.site90.xoolu.com.xoolutvandradio.R;
 
@@ -23,18 +24,21 @@ public class RadioAdapter extends RecyclerView.Adapter<RadioAdapter.RadioViewHol
 
     private Context context;
 
+    private Radio radio;
+
     //list of tv object
     private List<RadioDataModel> radioDataModelList=new ArrayList<>();
 
     //create tv adapter
-    public RadioAdapter(Context context){
+    public RadioAdapter(Context context,Radio radio){
 
         this.context=context;
+        this.radio=radio;
     }
 
     //set the tv list
-    public void setRadioDataModelList(List<RadioDataModel> radioDataModelList) {
-        this.radioDataModelList = radioDataModelList;
+    public void setRadioDataModelList(List<RadioDataModel> radioDataMode) {
+       radioDataModelList = radioDataMode;
     }
 
     @Override
@@ -68,6 +72,16 @@ public class RadioAdapter extends RecyclerView.Adapter<RadioAdapter.RadioViewHol
 
             srcImageView=(ImageView) itemView.findViewById(R.id.srcImageView);
             srcTextView=(TextView) itemView.findViewById(R.id.srcTextView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    radio.setPosition(getAdapterPosition());
+                    radio.setRadioPlayerViewVisible();
+                    radio.updateView();
+                    radio.play();
+                }
+            });
         }
     }
 }
